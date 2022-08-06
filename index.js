@@ -138,11 +138,21 @@ class Game {
         alert('Highscore saved!');
     }
 
+    resetGame = () => {
+        this.map = new SnakeMap();
+        this.snake = new Snake(10, 10);
+        this.fruit = new Fruit(3, 8);
+        this.intervalHandle = null;
+        this.gameOver = false;
+    }
+
     draw = () => {
         if (this.gameOver && this.intervalHandle) {
             clearInterval(this.intervalHandle);
             this.intervalHandle = null;
             this.collectResults();
+            this.resetGame();
+            this.start();
         } else {
             this.map.draw();
             this.fruit.draw();
